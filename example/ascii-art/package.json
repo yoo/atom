@@ -1,0 +1,15 @@
+{
+  "name": "ascii-art",
+  "main": "./lib/ascii-art",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A short description of your package",
+  "activationEvents": ["ascii-art:convert"],
+  "repository": "https://github.com/JohannWeging/atom/example/ascii-art",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.39.0"
+  },
+  "dependencies": {
+  }
+}
