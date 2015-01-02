@@ -1,0 +1,15 @@
+{
+  "name": "atom-testing",
+  "main": "./lib/atom-testing",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A short description of your package",
+  "activationEvents": ["atom-testing:test"],
+  "repository": "https://github.com/JohannWeging/atom/example/ascii-art",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.39.0"
+  },
+  "dependencies": {
+  }
+}
