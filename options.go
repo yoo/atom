@@ -35,7 +35,7 @@ func (m *ConfirmOption) toJsObject() js.Object {
 }
 
 func buttonsArray(buttons []Button) js.Object {
-	var jsButtons js.Object
+	jsButtons := js.Global.Get("Array").New()
 	for i, button := range buttons {
 		jsButtons.SetIndex(i, button.Name)
 	}
