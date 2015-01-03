@@ -23,15 +23,15 @@ func Activate(callback func()) {
 }
 
 // OnDidBeep doc at: https://atom.io/docs/api/v0.165.0/Atom#instance-onDidBeep
-func OnDidBeep(callback func()) *Disposable {
-	return &Disposable{o: atom.Call("onDidBeep", callback)}
+func OnDidBeep(callback func()) Disposable {
+	return &disposableImpl{o: atom.Call("onDidBeep", callback)}
 }
 
 // OnWillThrowError doc at: https://atom.io/docs/api/v0.165.0/Atom#instance-onWillThrowError
 // TODO: THIS NEEDS TESTING!
-func OnWillThrowError(callback func(*Event)) *Disposable {
+func OnWillThrowError(callback func(*Event)) Disposable {
 	// catch the js event object and convert it into a Event type and call the orginal callback
-	disposable := &Disposable{}
+	disposable := &disposableImpl{}
 	disposable.o = atom.Call("onWillThrowError", func(jsEvent js.Object) {
 		event := newEventFromJsObject(jsEvent)
 		callback(event)
@@ -41,8 +41,8 @@ func OnWillThrowError(callback func(*Event)) *Disposable {
 
 // OnDidThrowError doc at: https://atom.io/docs/api/v0.165.0/Atom#instance-onDidThrowError
 // TODO: THIS NEEDS TESTING!
-func OnDidThrowError(callback func(*Event)) *Disposable {
-	disposable := &Disposable{}
+func OnDidThrowError(callback func(*Event)) Disposable {
+	disposable := &disposableImpl{}
 	disposable.o = atom.Call("onDidThrowError", func(jsEvent js.Object) {
 		event := newEventFromJsObject(jsEvent)
 		callback(event)

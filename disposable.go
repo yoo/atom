@@ -3,16 +3,14 @@ package atom
 import "github.com/gopherjs/gopherjs/js"
 
 // Disposable doc at: https://atom.io/docs/api/v0.165.0/Disposable
-type Disposable struct {
+type Disposable interface {
+	Dispose()
+}
+
+type disposableImpl struct {
 	o js.Object
 }
 
-// Constructor doc at: https://atom.io/docs/api/v0.165.0/Disposable#instance-constructor
-func (d *Disposable) Constructor(disposalAction func()) {
-	d.o.Set("constructor", disposalAction)
-}
-
-// Dispose doc at: https://atom.io/docs/api/v0.165.0/Disposable#instance-dispose
-func (d *Disposable) Dispose() {
+func (d *disposableImpl) Dispose() {
 	d.o.Call("dispose")
 }
