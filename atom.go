@@ -3,6 +3,7 @@ package atom
 import "github.com/gopherjs/gopherjs/js"
 
 var atom js.Object
+var atomApi js.Object
 
 // Commands doc at: https://atom.io/docs/api/v0.165.0/Atom#instance-commands
 var Commands *CommandRegistry
@@ -11,6 +12,7 @@ var Commands *CommandRegistry
 var Workspace *WorkspaceT
 
 func init() {
+	atomApi = js.Global.Call("require", "atom")
 	atom = js.Global.Get("atom")
 	Commands = new(CommandRegistry)
 	Commands.o = atom.Get("commands")
