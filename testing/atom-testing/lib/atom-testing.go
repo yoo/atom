@@ -91,6 +91,33 @@ func TestGetVersion() {
 	stop()
 }
 
+func TestDisposal() {
+	start("TestDisposal")
+	didBeep := false
+
+	disposable := atom.OnDidBeep(func() {
+		didBeep = true
+	})
+	compDis := atom.NewCompositeDisposable(disposable)
+	atom.Beep()
+	if !didBeep {
+		logError("OnBeep callback wasn't called. didBeep: false, expected.")
+	}
+
+	didBeep = false
+	compDis.Dispose()
+
+	atom.Beep()
+
+	if didBeep {
+		logError("Dispose on the CompositeDisposable failed. didBeep: true, expected false")
+	}
+	stop()
+}
+
+func test() {
+}
+
 func start(funcName string) {
 	currentFunc = funcName
 	console.Log("Running: ", currentFunc, "\n")
@@ -128,8 +155,6 @@ func main() {
 }
 
 func activate() {
-	atom.Commands.Add("atom-workspace", "atom-testing:test", test)
-}
 
-func test() {
+	atom.Commands.Add("atom-workspace", "atom-testing:test", test)
 }
